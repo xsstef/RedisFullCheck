@@ -10,6 +10,7 @@ logs
 *.yml
 tags
 result.db.*
+result.db*
 *.tar.gz
 
 dump.data
@@ -26,3 +27,5 @@ diagnostic/
 *.pid
 src/vendor/*
 !src/vendor/vendor.json
+src/github.com/
+src/golang.org/

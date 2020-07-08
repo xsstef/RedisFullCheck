@@ -232,12 +232,13 @@ func (p *FullCheck) Start() {
 		panic(common.Logger.Critical(err))
 	}
 
-	common.Logger.Infof("sourceDbType=%v, p.sourcePhysicalDBList=%v", p.FullCheckParameter.SourceHost.DBType,
-		p.sourcePhysicalDBList)
+	common.Logger.Infof("sourceDbType=%v, p.sourcePhysicalDBList=%v, p.sourceLogicalDBMap=%v", p.FullCheckParameter.SourceHost.DBType,
+		p.sourcePhysicalDBList, p.sourceLogicalDBMap)
 
 	sourceClient.Close()
 	for db, keyNum := range p.sourceLogicalDBMap {
 		if p.SourceHost.IsCluster() == true {
+      common.Logger.Infof("db=%d:keys=%d", db, keyNum)
 			common.Logger.Infof("db=%d:keys=%d(inaccurate for type cluster)", db, keyNum)
 		} else {
 			common.Logger.Infof("db=%d:keys=%d", db, keyNum)
