@@ -62,26 +62,26 @@ func ParseKeyspace(content []byte) (map[int32]int64, error) {
 			reply[0] = int64(keysNum) + reply[0]
 		} else if bytes.HasPrefix(line,[]byte("list")) == true {
 			items := bytes.Split(line, []byte(":"))
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 10)
+			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
 			if err != nil {
 				return nil, err
 			}
 			reply[0] = int64(keysNum) + reply[0]
 		} else if bytes.HasPrefix(line,[]byte("zset")) == true {
 			items := bytes.Split(line, []byte(":"))
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 10)
+			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
 			if err != nil {
 				return nil, err
 			}
 			reply[0] = int64(keysNum) + reply[0]
 		} else if bytes.HasPrefix(line,[]byte("set")) == true {
 			items := bytes.Split(line, []byte(":"))
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 10)
+			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
 			if err != nil {
 				return nil, err
 			}
 			reply[0] = int64(keysNum) + reply[0]
-		} 		
+		}
 	} // end for
 	return reply, nil
 }
