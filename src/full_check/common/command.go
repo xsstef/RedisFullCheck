@@ -45,44 +45,18 @@ func ParseKeyspace(content []byte) (map[int32]int64, error) {
 				return nil, err
 			}
 			reply[int32(db)] = int64(keysNum)
-		} else if bytes.HasPrefix(line,[]byte("kv")) == true {
+		} else if bytes.HasPrefix(line,[]byte("#")) == true {
+                        continue
+                } else {
 			items := bytes.Split(line, []byte(":"))
-      fmt.Println("%v", items[1])
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
-			if err != nil {
-				return nil, err
-			}
-			reply[0] = int64(keysNum) + reply[0]
-		} else if bytes.HasPrefix(line,[]byte("hash")) == true {
-			items := bytes.Split(line, []byte(":"))
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
-			if err != nil {
-				return nil, err
-			}
-			reply[0] = int64(keysNum) + reply[0]
-		} else if bytes.HasPrefix(line,[]byte("list")) == true {
-			items := bytes.Split(line, []byte(":"))
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
-			if err != nil {
-				return nil, err
-			}
-			reply[0] = int64(keysNum) + reply[0]
-		} else if bytes.HasPrefix(line,[]byte("zset")) == true {
-			items := bytes.Split(line, []byte(":"))
-			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
-			if err != nil {
-				return nil, err
-			}
-			reply[0] = int64(keysNum) + reply[0]
-		} else if bytes.HasPrefix(line,[]byte("set")) == true {
-			items := bytes.Split(line, []byte(":"))
+                        fmt.Println("%v", items[1])
 			keysNum, err := strconv.ParseInt(string(items[1]), 10, 64)
 			if err != nil {
 				return nil, err
 			}
 			reply[0] = int64(keysNum) + reply[0]
 		}
-	} // end for
+        } // end for
 	return reply, nil
 }
 
